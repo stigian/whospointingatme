@@ -61,6 +61,7 @@ foreach($routeTable in $routeTables){
                         $pointerTemp | Add-Member -MemberType NoteProperty -Name "SubnetIP" -Value $subnetAddress
                         $pointerTemp | Add-Member -MemberType NoteProperty -Name "NicIP" -Value $nicIPJoined
                         $pointerTemp | Add-Member -MemberType NoteProperty -Name "Destination" -Value $addressPrefix
+                        $pointerTemp | Add-Member -MemberType NoteProperty -Name "RouteTableName" -Value $routeTableName
                         $pointers += $pointerTemp
                         #   }
                         }
