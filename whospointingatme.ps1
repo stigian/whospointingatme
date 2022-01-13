@@ -67,7 +67,18 @@ foreach($routeTable in $routeTables){
                         }
                     }
                 if(!$subnetConfigs.IpConfigurations){
-                    Write-Host "$subnetName has a route pointing to $targetIP but has no VMs associated with it"
+                    if($display){Write-Host "$subnetName has a route pointing to $targetIP but has no Network Interfaces associated with it"}
+                    $pointerTemp = New-Object PSObject
+                    $pointerTemp | Add-Member -MemberType NoteProperty -Name "VMRG" -Value ""
+                    $pointerTemp | Add-Member -MemberType NoteProperty -Name "VirtualMachine" -Value ""
+                    $pointerTemp | Add-Member -MemberType NoteProperty -Name "NetworkInterface" -Value ""
+                    $pointerTemp | Add-Member -MemberType NoteProperty -Name "VirtualNetwork" -Value $vnet.Name
+                    $pointerTemp | Add-Member -MemberType NoteProperty -Name "SubnetName" -Value $subnetName
+                    $pointerTemp | Add-Member -MemberType NoteProperty -Name "SubnetIP" -Value $subnetAddress
+                    $pointerTemp | Add-Member -MemberType NoteProperty -Name "NicIP" -Value ""
+                    $pointerTemp | Add-Member -MemberType NoteProperty -Name "Destination" -Value $addressPrefix
+                    $pointerTemp | Add-Member -MemberType NoteProperty -Name "RouteTableName" -Value $routeTableName
+                    $pointers += $pointerTemp
                     }
                 }
             }
